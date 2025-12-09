@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.43.4",
+    "@vueuse/core": "^10.11.0",
     "bootstrap": "^5.3.8",
     "pinia": "^3.0.3",
     "vue": "^3.5.22",
