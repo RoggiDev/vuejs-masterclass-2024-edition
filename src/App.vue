@@ -5,22 +5,14 @@ import Input from '@/components/ui/input/Input.vue'
 <template>
   <nav class="p-4 d-flex align-items-center justify-content-between px-4 border-bottom">
     <!-- Search -->
-    <form class="flex-grow-1" style="max-width: 24rem">
+    <form class="flex-grow-1 position-relative" style="max-width: 24rem">
       <div class="position-relative">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <g
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          >
-            <path d="m21 21l-4.34-4.34" />
-            <circle cx="11" cy="11" r="8" />
-          </g>
-        </svg>
+        <iconify-icon
+          icon="lucide:search"
+          class="position-absolute top-50 start-0 translate-middle-y ms-1 text-muted"
+        ></iconify-icon>
 
-        <Input type="text" class="form-control" placeholder="Search ..." />
+        <Input type="text" class="form-control ps-4" placeholder="Search ..." />
       </div>
     </form>
 
