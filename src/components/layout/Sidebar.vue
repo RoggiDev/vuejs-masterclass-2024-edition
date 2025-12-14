@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import SidebarLinks from './SidebarLinks.vue'
+import SidebarLinks from '@/components/Layout/SidebarLinks.vue'
+import { Button } from '@/components/ui/button/index.ts'
 
 const links = [
   {
@@ -45,13 +46,13 @@ const accountLinks = [
       class="d-flex align-items-center border-bottom px-0 px-lg-3 justify-content-center justify-content-lg-between"
       style="height: 4rem"
     >
-      <button class="btn btn-sm">
+      <Button class="btn btn-sm btn-dark">
         <iconify-icon icon="lucide:menu"></iconify-icon>
-      </button>
+      </Button>
 
-      <button class="btn btn-sm">
+      <Button class="btn btn-sm btn-dark">
         <iconify-icon icon="lucide:plus"></iconify-icon>
-      </button>
+      </Button>
     </div>
 
     <!-- Navigation -->
