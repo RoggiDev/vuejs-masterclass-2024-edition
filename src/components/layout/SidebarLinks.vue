@@ -11,7 +11,13 @@ defineProps<{
 </script>
 
 <template>
-  <RouterLink v-for="link in links" :key="link.title" :to="link.to" class="sidebar-link">
+  <RouterLink
+    exact-active-class="text-primary bg-secondary bg-opacity-10"
+    v-for="link in links"
+    :key="link.title"
+    :to="link.to"
+    class="sidebar-link"
+  >
     <iconify-icon :icon="link.icon"></iconify-icon>
 
     <span class="sidebar-text">{{ link.title }}</span>
