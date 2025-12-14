@@ -1,4 +1,42 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SidebarLinks from './SidebarLinks.vue'
+
+const links = [
+  {
+    title: 'Dashboard',
+    to: '/',
+    icon: 'lucide:house',
+  },
+  {
+    title: 'Projects',
+    to: '/projects',
+    icon: 'lucide:building-2',
+  },
+  {
+    title: 'My Tasks',
+    to: '/tasks',
+    icon: 'lucide:badge-check',
+  },
+]
+
+const accountLinks = [
+  {
+    title: 'Profile',
+    to: '/profile',
+    icon: 'lucide:user',
+  },
+  {
+    title: 'Settings',
+    to: '/settings',
+    icon: 'lucide:settings',
+  },
+  {
+    title: 'Sign out',
+    to: '/signout',
+    icon: 'lucide:log-out',
+  },
+]
+</script>
 
 <template>
   <aside class="sidebar d-flex flex-column border-end position-fixed bg-dark">
@@ -20,38 +58,12 @@
     <nav class="d-flex flex-column justify-content-between flex-grow-1 py-2">
       <!-- Top links -->
       <div>
-        <RouterLink to="/" class="sidebar-link">
-          <iconify-icon icon="lucide:house"></iconify-icon>
-          <span class="sidebar-text">Dashboard</span>
-        </RouterLink>
-
-        <RouterLink to="/projects" class="sidebar-link">
-          <iconify-icon icon="lucide:building-2"></iconify-icon>
-          <span class="sidebar-text">Projects</span>
-        </RouterLink>
-
-        <RouterLink to="/tasks" class="sidebar-link">
-          <iconify-icon icon="lucide:badge-check"></iconify-icon>
-          <span class="sidebar-text">My Tasks</span>
-        </RouterLink>
+        <SidebarLinks :links="links" />
       </div>
 
       <!-- Bottom links -->
       <div class="border-top py-3 text-center">
-        <RouterLink to="/profile" class="sidebar-link">
-          <iconify-icon icon="lucide:user"></iconify-icon>
-          <span class="sidebar-text">Profile</span>
-        </RouterLink>
-
-        <RouterLink to="/settings" class="sidebar-link">
-          <iconify-icon icon="lucide:settings"></iconify-icon>
-          <span class="sidebar-text">Settings</span>
-        </RouterLink>
-
-        <RouterLink to="/signout" class="sidebar-link">
-          <iconify-icon icon="lucide:log-out"></iconify-icon>
-          <span class="sidebar-text">Sign out</span>
-        </RouterLink>
+        <SidebarLinks :links="accountLinks" />
       </div>
     </nav>
   </aside>
@@ -66,39 +78,9 @@
   z-index: 1030;
 }
 
-.sidebar-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 1rem;
-  margin: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  color: var(--bs-secondary-color);
-  justify-content: center;
-  transition: color 0.15s ease;
-}
-
-.sidebar-link:hover {
-  color: var(--bs-primary);
-}
-
-.sidebar-text {
-  display: none;
-  white-space: nowrap;
-}
-
 @media (min-width: 992px) {
   .sidebar {
     width: 13rem;
-  }
-
-  .sidebar-link {
-    justify-content: flex-start;
-  }
-
-  .sidebar-text {
-    display: inline;
   }
 }
 </style>
