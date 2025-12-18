@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import Input from '@/components/ui/input/Input.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <nav class="p-4 d-flex align-items-center justify-content-between px-4 border-bottom">
