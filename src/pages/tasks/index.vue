@@ -5,13 +5,15 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
 
 const tasks = ref<Tables<'tasks'>[] | null>(null)
-;(async () => {
+const getTask = async () => {
   const { data, error } = await supabase.from('tasks').select()
 
   if (error) console.log(error)
 
   tasks.value = data
-})()
+}
+
+await getTask()
 
 const columns: ColumnDef<Tables<'tasks'>>[] = [
   {
