@@ -26,7 +26,7 @@
         <img
           src="https://avatars.githubusercontent.com/u/6128107?s=200&v=4"
           alt="@radix-vue"
-          class="rounded-circle"
+          class="rounded-circle border border-secondary bg-dark"
           width="40"
           height="40"
         />

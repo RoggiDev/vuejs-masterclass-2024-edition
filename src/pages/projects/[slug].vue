@@ -26,28 +26,24 @@ await getProjects()
 
 <template>
   <!-- Project details -->
-  <div class="table-responsive mb-4">
+  <div v-if="project" class="table-responsive mb-4">
     <table class="table table-borderless align-middle">
       <tbody>
         <tr>
           <th scope="row" class="w-25">Name</th>
-          <td>Lorem ipsum dolor sit amet.</td>
+          <td>{{ project?.name }}</td>
         </tr>
 
         <tr>
           <th scope="row">Description</th>
           <td>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure qui tempora ex nihil,
-            ab reprehenderit dolorem sunt veritatis perferendis? Repudiandae quis velit quasi ab
-            natus quia ratione voluptas deserunt labore sed distinctio nam fuga fugit vero
-            voluptates placeat aperiam, saepe excepturi eos harum consectetur doloremque
-            perspiciatis nesciunt! Incidunt, modi.
+            {{ project.description }}
           </td>
         </tr>
 
         <tr>
           <th scope="row">Status</th>
-          <td>In progress</td>
+          <td>{{ project.status }}</td>
         </tr>
 
         <tr>
@@ -55,13 +51,18 @@ await getProjects()
           <td>
             <div class="d-flex align-items-center">
               <RouterLink
-                v-for="n in 5"
-                :key="n"
+                v-for="collab in project.collaborators"
+                :key="collab"
                 to=""
-                class="rounded-circle border border-primary bg-secondary text-white d-flex align-items-center justify-content-center avatar"
+                class="avatar-wrapper"
               >
-                <!-- Placeholder avatar -->
-                <span class="small fw-semibold">{{ n }}</span>
+                <img
+                  src="https://avatars.githubusercontent.com/u/6128107?s=200&v=4"
+                  alt="Collaborator avatar"
+                  class="rounded-circle border border-secondary bg-dark avatar"
+                  width="40"
+                  height="40"
+                />
               </RouterLink>
             </div>
           </td>
@@ -70,7 +71,7 @@ await getProjects()
     </table>
   </div>
 
-  <section class="row g-4">
+  <section v-if="project" class="row g-4">
     <!-- Tasks -->
     <div class="col-12 col-md-6">
       <h2 class="section-title">Tasks</h2>
@@ -84,8 +85,9 @@ await getProjects()
               <th>Due Date</th>
             </tr>
           </thead>
+
           <tbody>
-            <tr v-for="n in 5" :key="n">
+            <tr v-for="task in project.tasks" :key="task.id">
               <td>Lorem ipsum dolor sit amet.</td>
               <td>In progress</td>
               <td>22/08/2024</td>
@@ -103,6 +105,21 @@ await getProjects()
         <p class="text-secondary small fw-semibold mb-0 px-3">
           This project doesn't have documents yet...
         </p>
+
+        <!-- <table class="table table-dark table-hover mb-0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Visibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Lorem ipsum dolor sit amet.</td>
+              <td>Private</td>
+            </tr>
+          </tbody>
+        </table> -->
       </div>
     </div>
   </section>
@@ -126,15 +143,22 @@ await getProjects()
 }
 
 /* Avatars */
+.avatar-wrapper {
+  position: relative;
+}
+
 .avatar {
-  width: 36px;
-  height: 36px;
-  margin-right: -0.75rem;
+  width: 40px;
+  height: 40px;
+  margin-right: -16px;
   transition: transform 0.15s ease;
 }
 
-.avatar:hover {
+.avatar-wrapper:hover {
+  z-index: 10;
+}
+
+.avatar-wrapper:hover .avatar {
   transform: scale(1.1);
-  z-index: 1;
 }
 </style>
