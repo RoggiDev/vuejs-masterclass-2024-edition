@@ -6,7 +6,7 @@ import type { Projects } from '@/utils/supaQueries'
 usePageStore().pageData.title = 'Projects'
 
 const projects = ref<Projects | null>(null)
-const getProyects = async () => {
+const getProjects = async () => {
   const { data, error } = await projectsQuery
 
   if (error) console.log(error)
@@ -16,7 +16,7 @@ const getProyects = async () => {
   // console.log('Projects: ', projects.value)
 }
 
-await getProyects()
+await getProjects()
 </script>
 
 <template>
