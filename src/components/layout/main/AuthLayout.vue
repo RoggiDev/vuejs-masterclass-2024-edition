@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Sidebar from '@/components/Layout/Sidebar.vue'
-import TopNavbar from '@/components/Layout/TopNavbar.vue'
+const { pageData } = storeToRefs(usePageStore())
 </script>
 
 <template>
@@ -14,7 +13,7 @@ import TopNavbar from '@/components/Layout/TopNavbar.vue'
 
     <main class="flex-grow-1 p-4 p-lg-5">
       <div class="d-flex align-items-center mb-4">
-        <h1>Page Title</h1>
+        <h1>{{ pageData.title }}</h1>
       </div>
 
       <slot />
