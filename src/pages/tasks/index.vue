@@ -8,7 +8,14 @@ usePageStore().pageData.title = 'My Tasks'
 
 const tasks = ref<Tables<'tasks'>[] | null>(null)
 const getTask = async () => {
-  const { data, error } = await supabase.from('tasks').select()
+  const { data, error } = await supabase.from('tasks').select(`
+  *,
+  projects (
+    id,
+    name,
+    slug
+  )
+  `)
 
   if (error) console.log(error)
 
@@ -44,10 +51,17 @@ const columns: ColumnDef<Tables<'tasks'>>[] = [
     },
   },
   {
-    accessorKey: 'project_id',
+    accessorKey: 'projects',
     header: () => h('div', { class: 'text-start' }, 'Project'),
     cell: ({ row }) => {
-      return h('div', { class: 'text-start font-medium' }, row.getValue('project_id'))
+      return h(
+        RouterLink,
+        {
+          to: `/projects/${row.original.projects.slug}`,
+          class: 'text-start font-medium d-block w-100',
+        },
+        () => row.getValue('projects').name,
+      )
     },
   },
   {
