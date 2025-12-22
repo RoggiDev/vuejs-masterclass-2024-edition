@@ -44,3 +44,14 @@
     </div>
   </nav>
 </template>
+
+<style>
+/* Avatar */
+.dropdown img {
+  transition: transform 0.15s ease;
+}
+
+.dropdown img:hover {
+  transform: scale(1.1);
+}
+</style>

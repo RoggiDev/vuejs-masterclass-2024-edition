@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppErrorPage: typeof import('./src/components/AppError/AppErrorPage.vue')['default']
     AuthLayout: typeof import('./src/components/Layout/main/AuthLayout.vue')['default']
     Button: typeof import('./src/components/ui/button/Button.vue')['default']
     DataTable: typeof import('./src/components/ui/data-table/DataTable.vue')['default']
