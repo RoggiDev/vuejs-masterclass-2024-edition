@@ -15,6 +15,8 @@ const getTask = async () => {
 }
 
 await getTask()
+
+useErrorStore().setError({ error: Error('I am an uncaught error') })
 </script>
 
 <template>
