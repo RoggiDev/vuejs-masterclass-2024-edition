@@ -36,6 +36,15 @@ router.afterEach(() => {
 <template>
   <section class="error d-flex justify-content-center align-items-center text-center">
     <AppErrorDevSection :message :customCode :code :statusCode :hint :details />
+    <!-- <AppErrorProdSection
+      :message
+      :customCode
+      :code
+      :statusCode
+      :hint
+      :details
+      :isCustomError="errorStore.isCustomError"
+    /> -->
   </section>
 </template>
 
