@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AppErrorDevSection from './AppErrorDevSection.vue'
+
 const router = useRouter()
 
 const errorStore = useErrorStore()
@@ -33,29 +35,7 @@ router.afterEach(() => {
 
 <template>
   <section class="error d-flex justify-content-center align-items-center text-center">
-    <div>
-      <iconify-icon icon="lucide:triangle-alert" class="error-icon text-danger" />
-
-      <h1 class="error-code text-secondary">{{ customCode || code }}</h1>
-
-      <p class="error-code" v-if="statusCode">Status Code: {{ statusCode }}</p>
-
-      <p class="error-msg">{{ message }}</p>
-
-      <p v-if="hint">{{ hint }}</p>
-
-      <p v-if="details">{{ details }}</p>
-
-      <div class="error-footer">
-        <p class="error-footer-text text-secondary-emphasis">
-          You'll find lots to explore on the home page.
-        </p>
-
-        <RouterLink to="/">
-          <button class="btn btn-primary btn-sm px-4">Back to homepage</button>
-        </RouterLink>
-      </div>
-    </div>
+    <AppErrorDevSection :message :customCode :code :statusCode :hint :details />
   </section>
 </template>
 
@@ -66,23 +46,23 @@ router.afterEach(() => {
   margin-top: -5rem;
 }
 
-.error-icon {
+:deep(.error-icon) {
   font-size: 4rem;
   margin-bottom: 1rem;
 }
 
-.error-code {
+:deep(.error-code) {
   font-weight: 800;
   font-size: 4rem;
   margin-bottom: 0.5rem;
 }
 
-.error-msg {
+:deep(.error-msg) {
   font-weight: 800;
   font-size: 1.75rem;
 }
 
-.error-footer {
+:deep(.error-footer) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,11 +71,11 @@ router.afterEach(() => {
   font-weight: 300;
 }
 
-.error-footer-text {
+:deep(.error-footer-text) {
   font-size: 1.125rem;
 }
 
-p {
+:deep(p) {
   margin: 0.5rem 0;
 }
 </style>
