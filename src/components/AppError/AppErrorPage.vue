@@ -8,9 +8,22 @@ const error = ref(errorStore.activeError)
 const message = ref('')
 const customCode = ref(0)
 
-if (error.value) {
+const details = ref('')
+const code = ref('')
+const hint = ref('')
+const statusCode = ref(0)
+
+if (error.value && !('code' in error.value)) {
   message.value = error.value.message
   customCode.value = error.value.customCode ?? 0
+}
+
+if (error.value && 'code' in error.value) {
+  message.value = error.value.message
+  details.value = error.value.details
+  hint.value = error.value.hint
+  code.value = error.value.code
+  statusCode.value = error.value.statusCode ?? 0
 }
 
 router.afterEach(() => {
@@ -23,9 +36,15 @@ router.afterEach(() => {
     <div>
       <iconify-icon icon="lucide:triangle-alert" class="error-icon text-danger" />
 
-      <h1 class="error-code text-secondary">{{ customCode }}</h1>
+      <h1 class="error-code text-secondary">{{ customCode || code }}</h1>
+
+      <p class="error-code" v-if="statusCode">Status Code: {{ statusCode }}</p>
 
       <p class="error-msg">{{ message }}</p>
+
+      <p v-if="hint">{{ hint }}</p>
+
+      <p v-if="details">{{ details }}</p>
 
       <div class="error-footer">
         <p class="error-footer-text text-secondary-emphasis">
