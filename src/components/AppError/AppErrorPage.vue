@@ -1,8 +1,20 @@
 <script setup lang="ts">
 const router = useRouter()
 
+const errorStore = useErrorStore()
+
+const error = ref(errorStore.activeError)
+
+const message = ref('')
+const customCode = ref(0)
+
+if (error.value) {
+  message.value = error.value.message
+  customCode.value = error.value.customCode ?? 0
+}
+
 router.afterEach(() => {
-  useErrorStore().activeError = false
+  errorStore.activeError = null
 })
 </script>
 
@@ -11,9 +23,9 @@ router.afterEach(() => {
     <div>
       <iconify-icon icon="lucide:triangle-alert" class="error-icon text-danger" />
 
-      <h1 class="error-code text-secondary">404</h1>
+      <h1 class="error-code text-secondary">{{ customCode }}</h1>
 
-      <p class="error-msg">Page not found</p>
+      <p class="error-msg">{{ message }}</p>
 
       <div class="error-footer">
         <p class="error-footer-text text-secondary-emphasis">
