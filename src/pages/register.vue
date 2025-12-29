@@ -1,4 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const formData = ref({
+  username: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+})
+</script>
 
 <template>
   <div
@@ -41,6 +50,7 @@
               class="form-control"
               placeholder="johndoe19"
               required
+              v-model="formData.username"
             />
           </div>
 
@@ -49,14 +59,28 @@
             <div class="col-12 col-sm-6">
               <label for="first_name" class="form-label text-start w-100"> First Name </label>
 
-              <input id="first_name" type="text" class="form-control" placeholder="John" required />
+              <input
+                id="first_name"
+                type="text"
+                class="form-control"
+                placeholder="John"
+                required
+                v-model="formData.firstName"
+              />
             </div>
 
             <!-- Last Name -->
             <div class="col-12 col-sm-6">
               <label for="last_name" class="form-label text-start w-100"> Last Name </label>
 
-              <input id="last_name" type="text" class="form-control" placeholder="Doe" required />
+              <input
+                id="last_name"
+                type="text"
+                class="form-control"
+                placeholder="Doe"
+                required
+                v-model="formData.lastName"
+              />
             </div>
           </div>
 
@@ -70,6 +94,7 @@
               class="form-control"
               placeholder="johndoe19@example.com"
               required
+              v-model="formData.email"
             />
           </div>
 
@@ -84,6 +109,7 @@
               placeholder="*****"
               autocomplete="new-password"
               required
+              v-model="formData.password"
             />
           </div>
 
@@ -100,6 +126,7 @@
               placeholder="*****"
               autocomplete="new-password"
               required
+              v-model="formData.confirmPassword"
             />
           </div>
 
