@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { supabase } from '@/lib/supabaseClient'
+
 const formData = ref({
   username: '',
   firstName: '',
@@ -7,6 +9,17 @@ const formData = ref({
   password: '',
   confirmPassword: '',
 })
+
+const signup = async () => {
+  const { data, error } = await supabase.auth.signUp({
+    email: formData.value.email,
+    password: formData.value.password,
+  })
+
+  if (error) return console.log(error)
+
+  console.log(data)
+}
 </script>
 
 <template>
@@ -39,7 +52,7 @@ const formData = ref({
         </div>
 
         <!-- Form -->
-        <form class="d-grid gap-3">
+        <form class="d-grid gap-3" @submit.prevent="signup">
           <!-- Username -->
           <div>
             <label for="username" class="form-label text-start w-100"> Username </label>
