@@ -1,4 +1,24 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { supabase } from '@/lib/supabaseClient'
+
+const formData = ref({
+  email: '',
+  password: '',
+})
+
+const router = useRouter()
+
+const signin = async () => {
+  const { error } = await supabase.auth.signInWithPassword({
+    email: formData.value.email,
+    password: formData.value.password,
+  })
+
+  if (error) return console.log(error)
+
+  router.push('/')
+}
+</script>
 
 <template>
   <div
@@ -28,7 +48,7 @@
         </div>
 
         <!-- Form -->
-        <form class="d-grid gap-3">
+        <form class="d-grid gap-3" @submit.prevent="signin">
           <!-- Email -->
           <div>
             <label for="email" class="form-label text-start w-100"> Email </label>
@@ -40,6 +60,7 @@
               placeholder="johndoe19@example.com"
               autocomplete="email"
               required
+              v-model="formData.email"
             />
           </div>
 
@@ -59,6 +80,7 @@
               class="form-control"
               autocomplete="current-password"
               required
+              v-model="formData.password"
             />
           </div>
 
