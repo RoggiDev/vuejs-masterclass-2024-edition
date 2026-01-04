@@ -1,19 +1,21 @@
 <script setup lang="ts">
 interface LinkProp {
   title: string
-  to: string
+  to?: string
   icon: string
 }
 
-defineProps<{
+const props = defineProps<{
   links: LinkProp[]
 }>()
+
+const filteredLinks = props.links.filter((link): link is LinkProp & { to: string } => !!link.to)
 </script>
 
 <template>
   <RouterLink
     exact-active-class="text-primary bg-secondary bg-opacity-10"
-    v-for="link in links"
+    v-for="link in filteredLinks"
     :key="link.title"
     :to="link.to"
     class="sidebar-link"
@@ -22,6 +24,12 @@ defineProps<{
 
     <span class="sidebar-text">{{ link.title }}</span>
   </RouterLink>
+
+  <div class="sidebar-link cursor-pointer">
+    <!-- <iconify-icon :icon="link.icon"></iconify-icon>
+
+    <span class="sidebar-text">{{ link.title }}</span> -->
+  </div>
 </template>
 
 <style scoped>
