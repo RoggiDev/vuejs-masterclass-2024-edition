@@ -6,7 +6,7 @@ const formData = ref({
   password: '',
 })
 
-const { serverError, handleServerError } = useFormErrors()
+const { serverError, handleServerError, realtimeErrors, handleLoginForm } = useFormErrors()
 
 const router = useRouter()
 
@@ -61,7 +61,12 @@ const signin = async () => {
               required
               v-model="formData.email"
               :class="{ 'border-danger': serverError }"
+              @input="handleLoginForm(formData)"
             />
+
+            <ul class="small text-start text-danger" v-if="realtimeErrors?.email.lenght">
+              <li v-for="error in realtimeErrors.email" :key="error">{{ serverError }}</li>
+            </ul>
           </div>
 
           <!-- Password -->
@@ -83,6 +88,10 @@ const signin = async () => {
               v-model="formData.password"
               :class="{ 'border-danger': serverError }"
             />
+
+            <ul class="small text-start text-danger" v-if="realtimeErrors?.password.lenght">
+              <li v-for="error in realtimeErrors.password" :key="error">{{ serverError }}</li>
+            </ul>
           </div>
 
           <ul class="small text-start text-danger" v-if="serverError">
