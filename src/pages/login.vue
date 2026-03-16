@@ -6,12 +6,17 @@ const formData = ref({
   password: '',
 })
 
+const _error = ref('')
+
 const router = useRouter()
 
 const signin = async () => {
-  const isLoggedIn = await login(formData.value)
+  const { error } = await login(formData.value)
 
-  if (isLoggedIn) router.push('/')
+  if (!error) return router.push('/')
+
+  _error.value =
+    error.message === 'Invalid login credentials' ? 'Incorrect email or password' : error.message
 }
 </script>
 
@@ -56,6 +61,7 @@ const signin = async () => {
               autocomplete="email"
               required
               v-model="formData.email"
+              :class="{ 'border-danger': _error }"
             />
           </div>
 
@@ -76,8 +82,13 @@ const signin = async () => {
               autocomplete="current-password"
               required
               v-model="formData.password"
+              :class="{ 'border-danger': _error }"
             />
           </div>
+
+          <ul class="small text-start text-danger" v-if="_error">
+            <li>{{ _error }}</li>
+          </ul>
 
           <!-- Submit -->
           <button type="submit" class="btn btn-primary w-100">Login</button>
