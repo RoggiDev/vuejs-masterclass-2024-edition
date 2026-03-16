@@ -5,31 +5,30 @@ interface LinkProp {
   icon: string
 }
 
-const props = defineProps<{
+defineProps<{
   links: LinkProp[]
 }>()
-
-const filteredLinks = props.links.filter((link): link is LinkProp & { to: string } => !!link.to)
 </script>
 
 <template>
-  <RouterLink
-    exact-active-class="text-primary bg-secondary bg-opacity-10"
-    v-for="link in filteredLinks"
-    :key="link.title"
-    :to="link.to"
-    class="sidebar-link"
-  >
-    <iconify-icon :icon="link.icon"></iconify-icon>
+  <template v-for="link in links" :key="link.title">
+    <RouterLink
+      v-if="link.to"
+      exact-active-class="text-primary bg-secondary bg-opacity-10"
+      :to="link.to"
+      class="sidebar-link"
+    >
+      <iconify-icon :icon="link.icon"></iconify-icon>
 
-    <span class="sidebar-text">{{ link.title }}</span>
-  </RouterLink>
+      <span class="sidebar-text">{{ link.title }}</span>
+    </RouterLink>
 
-  <div class="sidebar-link cursor-pointer">
-    <!-- <iconify-icon :icon="link.icon"></iconify-icon>
+    <div v-else class="sidebar-link">
+      <iconify-icon :icon="link.icon"></iconify-icon>
 
-    <span class="sidebar-text">{{ link.title }}</span> -->
-  </div>
+      <span class="sidebar-text">{{ link.title }}</span>
+    </div>
+  </template>
 </template>
 
 <style scoped>
@@ -44,6 +43,7 @@ const filteredLinks = props.links.filter((link): link is LinkProp & { to: string
   color: var(--bs-secondary-color);
   justify-content: center;
   transition: color 0.15s ease;
+  cursor: pointer;
 }
 
 .sidebar-link:hover {
