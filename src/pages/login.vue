@@ -75,7 +75,7 @@ const signin = async () => {
               :class="{ 'border-danger': serverError }"
             />
 
-            <ul class="small text-start text-danger" v-if="realtimeErrors?.email.lenght">
+            <ul class="small text-start text-danger" v-if="realtimeErrors?.email.length">
               <li v-for="error in realtimeErrors.email" :key="error">{{ serverError }}</li>
             </ul>
           </div>
@@ -100,7 +100,7 @@ const signin = async () => {
               :class="{ 'border-danger': serverError }"
             />
 
-            <ul class="small text-start text-danger" v-if="realtimeErrors?.password.lenght">
+            <ul class="small text-start text-danger" v-if="realtimeErrors?.password.length">
               <li v-for="error in realtimeErrors.password" :key="error">{{ serverError }}</li>
             </ul>
           </div>
