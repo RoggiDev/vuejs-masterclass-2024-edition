@@ -25,7 +25,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.43.4",
     "@tanstack/vue-table": "^8.21.3",
-    "@vueuse/core": "^10.11.0",
+    "@vueuse/core": "^10.11.1",
     "bootstrap": "^5.3.8",
     "iconify-icon": "^3.0.2",
     "pinia": "^3.0.3",
