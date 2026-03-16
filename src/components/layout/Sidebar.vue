@@ -33,6 +33,11 @@ const accountLinks = [
     icon: 'lucide:log-out',
   },
 ]
+
+const executeAction = (linkTitle: string) => {
+  if (linkTitle === 'Sign Out') {
+  }
+}
 </script>
 
 <template>
@@ -60,7 +65,7 @@ const accountLinks = [
 
       <!-- Bottom links -->
       <div class="border-top py-3 text-center">
-        <SidebarLinks :links="accountLinks" />
+        <SidebarLinks :links="accountLinks" @actionClicked="executeAction" />
       </div>
     </nav>
   </aside>

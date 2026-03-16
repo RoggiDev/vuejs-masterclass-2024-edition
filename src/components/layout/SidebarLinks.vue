@@ -8,6 +8,14 @@ interface LinkProp {
 defineProps<{
   links: LinkProp[]
 }>()
+
+const emits = defineEmits<{
+  actionClicked: [string]
+}>()
+
+const emitActionClicked = (linkTitle: string) => {
+  emits('actionClicked', linkTitle)
+}
 </script>
 
 <template>
@@ -23,7 +31,7 @@ defineProps<{
       <span class="sidebar-text">{{ link.title }}</span>
     </RouterLink>
 
-    <div v-else class="sidebar-link">
+    <div v-else class="sidebar-link" @click="emitActionClicked(link.title)">
       <iconify-icon :icon="link.icon"></iconify-icon>
 
       <span class="sidebar-text">{{ link.title }}</span>
