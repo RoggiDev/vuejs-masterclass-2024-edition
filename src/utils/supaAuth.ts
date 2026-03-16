@@ -40,3 +40,13 @@ export const login = async (formData: LoginForm) => {
 
   return true
 }
+
+export const logout = async () => {
+  const { error } = await supabase.auth.signOut()
+
+  if (error) return console.log(error)
+
+  await authStore.setAuth()
+
+  return true
+}
