@@ -23,7 +23,7 @@ await getProject(slug)
         <tr>
           <th scope="row" class="w-25">Name</th>
           <td>
-            <AppInPlaceEdit v-model="project.name" />
+            <AppInPlaceEdit v-model="project.name" @commit="console.log('changed!')" />
           </td>
         </tr>
 
