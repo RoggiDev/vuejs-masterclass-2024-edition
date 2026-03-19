@@ -36,7 +36,8 @@ export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<Projects[0]>[] 
                 return h(
                   'div',
                   {
-                    class: 'rounded-circle overflow-hidden border border-secondary',
+                    class:
+                      'rounded-circle overflow-hidden border border-secondary d-flex align-items-center',
                     style: 'width:40px; height:40px;',
                   },
                   [
