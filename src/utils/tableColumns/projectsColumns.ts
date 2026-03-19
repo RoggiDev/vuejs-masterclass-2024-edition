@@ -1,8 +1,10 @@
+import { RouterLink } from 'vue-router'
 import type { ColumnDef } from '@tanstack/vue-table'
 import type { Projects } from '../supaQueries'
-import { RouterLink } from 'vue-router'
+import type { Ref } from 'vue'
+import type { GroupedCollabs } from '@/types/GroupedCollabs'
 
-export const columns: ColumnDef<Projects[0]>[] = [
+export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<Projects[0]>[] => [
   {
     accessorKey: 'name',
     header: () => h('div', { class: 'text-start' }, 'Name'),
@@ -27,8 +29,23 @@ export const columns: ColumnDef<Projects[0]>[] = [
     cell: ({ row }) => {
       return h(
         'div',
-        { class: 'text-start font-medium' },
-        JSON.stringify(row.getValue('collaborators')),
+        { class: 'text-start fw-medium d-flex gap-2' },
+        collabs.value[row.original.id]?.map((collab) => {
+          return h(
+            'div',
+            {
+              class: 'rounded-circle overflow-hidden border border-secondary',
+              style: 'width:40px; height:40px;',
+            },
+            [
+              h('img', {
+                src: collab.avatar_url || '',
+                alt: 'avatar',
+                class: 'w-100 h-100 object-fit-cover',
+              }),
+            ],
+          )
+        }),
       )
     },
   },
