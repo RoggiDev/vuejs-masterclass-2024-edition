@@ -22,7 +22,9 @@ await getProject(slug)
       <tbody>
         <tr>
           <th scope="row" class="w-25">Name</th>
-          <td>{{ project?.name }}</td>
+          <td>
+            <AppInPlaceEdit v-model="project.name" />
+          </td>
         </tr>
 
         <tr>
