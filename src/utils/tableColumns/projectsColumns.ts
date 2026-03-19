@@ -30,22 +30,40 @@ export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<Projects[0]>[] 
       return h(
         'div',
         { class: 'text-start fw-medium d-flex gap-2' },
-        collabs.value[row.original.id]?.map((collab) => {
-          return h(
-            'div',
-            {
-              class: 'rounded-circle overflow-hidden border border-secondary',
-              style: 'width:40px; height:40px;',
-            },
-            [
-              h('img', {
-                src: collab.avatar_url || '',
-                alt: 'avatar',
-                class: 'w-100 h-100 object-fit-cover',
-              }),
-            ],
-          )
-        }),
+        collabs.value[row.original.id]
+          ? collabs.value[row.original.id]?.map((collab) => {
+              return h(RouterLink, { to: `/users/${collab.username}` }, () => {
+                return h(
+                  'div',
+                  {
+                    class: 'rounded-circle overflow-hidden border border-secondary',
+                    style: 'width:40px; height:40px;',
+                  },
+                  [
+                    h('img', {
+                      src: collab.avatar_url || '',
+                      alt: 'avatar',
+                      class: 'w-100 h-100 object-fit-cover',
+                    }),
+                  ],
+                )
+              })
+            })
+          : row.original.collaborators.map(() => {
+              return h(
+                'div',
+                {
+                  class:
+                    'rounded-circle overflow-hidden border border-secondary d-flex align-items-center justify-content-center placeholder-glow',
+                  style: 'width:40px; height:40px;',
+                },
+                [
+                  h('span', {
+                    class: 'placeholder col-6 rounded-circle',
+                  }),
+                ],
+              )
+            }),
       )
     },
   },
