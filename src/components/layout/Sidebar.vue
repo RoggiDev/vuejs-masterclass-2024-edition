@@ -63,7 +63,7 @@ watchEffect(() => {
 
 <template>
   <aside
-    class="sidebar d-flex flex-column border-end position-fixed bg-dark"
+    class="sidebar d-flex flex-column border-end position-fixed bg-body"
     :class="{ 'sidebar-expanded': menuOpen, 'sidebar-collapsed': !menuOpen }"
   >
     <!-- Header -->
@@ -71,9 +71,9 @@ watchEffect(() => {
       class="d-flex align-items-center border-bottom px-0 px-lg-2 justify-content-around justify-content-lg-between"
       style="height: 4rem"
     >
-      <Button @click="toggleMenu" class="btn btn-sm btn-dark">
+      <button @click="toggleMenu" class="btn btn-sm bg-transparent">
         <iconify-icon icon="lucide:menu"></iconify-icon>
-      </Button>
+      </button>
 
       <!-- Dropdown -->
       <div class="dropdown">
@@ -83,9 +83,9 @@ watchEffect(() => {
           role="button"
           data-bs-toggle="dropdown"
         >
-          <Button class="btn btn-sm btn-dark">
+          <button class="btn btn-sm bg-transparent">
             <iconify-icon icon="lucide:plus"></iconify-icon>
-          </Button>
+          </button>
         </a>
 
         <ul class="dropdown-menu dropdown-menu-end">
