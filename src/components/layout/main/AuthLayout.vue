@@ -15,26 +15,28 @@ provide(menuKey, {
 </script>
 
 <template>
-  <!-- Sidebar -->
-  <Sidebar @taskClicked="taskSheetOpen = true" />
+  <div>
+    <!-- Sidebar -->
+    <Sidebar @taskClicked="taskSheetOpen = true" />
 
-  <AppNewTask v-model="taskSheetOpen" />
+    <AppNewTask v-model="taskSheetOpen" />
 
-  <!-- Main content -->
-  <div
-    class="main-content d-flex flex-column"
-    :class="{ 'content-expanded': menuOpen, 'content-collapsed': !menuOpen }"
-  >
-    <!-- Top Navbar -->
-    <TopNavbar />
+    <!-- Main content -->
+    <div
+      class="main-content d-flex flex-column"
+      :class="{ 'content-expanded': menuOpen, 'content-collapsed': !menuOpen }"
+    >
+      <!-- Top Navbar -->
+      <TopNavbar />
 
-    <main class="flex-grow-1 p-4 p-lg-5">
-      <div class="d-flex align-items-center mb-4">
-        <h1>{{ pageData.title }}</h1>
-      </div>
+      <main class="flex-grow-1 p-4 p-lg-5">
+        <div class="d-flex align-items-center mb-4">
+          <h1>{{ pageData.title }}</h1>
+        </div>
 
-      <slot />
-    </main>
+        <slot />
+      </main>
+    </div>
   </div>
 </template>
 

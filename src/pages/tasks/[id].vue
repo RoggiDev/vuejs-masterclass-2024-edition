@@ -141,7 +141,7 @@ const triggerDelete = async () => {
   </div>
 </template>
 
-<style>
+<style scoped>
 /* Avatars */
 .avatar-wrapper {
   position: relative;
