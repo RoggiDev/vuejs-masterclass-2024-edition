@@ -4,6 +4,8 @@ import AppNewTask from '@/components/AppNew/AppNewTask.vue'
 const { pageData } = storeToRefs(usePageStore())
 
 const taskSheetOpen = ref(false)
+
+const { menuOpen } = useMenu()
 </script>
 
 <template>
@@ -13,7 +15,10 @@ const taskSheetOpen = ref(false)
   <AppNewTask v-model="taskSheetOpen" />
 
   <!-- Main content -->
-  <div class="main-content d-flex flex-column">
+  <div
+    class="main-content d-flex flex-column"
+    :class="{ 'content-expanded': menuOpen, 'content-collapsed': !menuOpen }"
+  >
     <!-- Top Navbar -->
     <TopNavbar />
 
@@ -29,13 +34,16 @@ const taskSheetOpen = ref(false)
 
 <style scoped>
 .main-content {
-  margin-left: 4rem;
-  transition: margin-left 0.2s ease;
+  transition: margin-left 0.25s ease-in-out;
 }
 
-@media (min-width: 992px) {
-  .main-content {
-    margin-left: 13rem;
-  }
+/* Sidebar colapsado */
+.content-collapsed {
+  margin-left: 5rem;
+}
+
+/* Sidebar expandido */
+.content-expanded {
+  margin-left: 13rem;
 }
 </style>

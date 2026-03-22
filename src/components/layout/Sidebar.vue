@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useWindowSize } from '@vueuse/core'
+const { profile } = storeToRefs(useAuthStore())
+
 const links = [
   {
     title: 'Dashboard',
@@ -17,22 +20,19 @@ const links = [
   },
 ]
 
-const accountLinks = [
-  {
-    title: 'Profile',
-    to: '/profile',
-    icon: 'lucide:user',
-  },
-  {
-    title: 'Settings',
-    to: '/settings',
-    icon: 'lucide:settings',
-  },
-  {
-    title: 'Sign out',
-    icon: 'lucide:log-out',
-  },
-]
+const accountLinks = computed(() => {
+  return [
+    {
+      title: 'Profile',
+      to: `/users/${profile.value?.username}`,
+      icon: 'lucide:user',
+    },
+    {
+      title: 'Sign Out',
+      icon: 'lucide:log-out',
+    },
+  ]
+})
 
 const router = useRouter()
 
@@ -46,16 +46,31 @@ const executeAction = async (linkTitle: string) => {
 }
 
 defineEmits(['taskClicked'])
+
+const { menuOpen, toggleMenu } = useMenu()
+
+const windowWidth = useWindowSize().width
+
+watchEffect(() => {
+  if (windowWidth.value > 1024) {
+    menuOpen.value = true
+  } else {
+    menuOpen.value = false
+  }
+})
 </script>
 
 <template>
-  <aside class="sidebar d-flex flex-column border-end position-fixed bg-dark">
+  <aside
+    class="sidebar d-flex flex-column border-end position-fixed bg-dark"
+    :class="{ 'sidebar-expanded': menuOpen, 'sidebar-collapsed': !menuOpen }"
+  >
     <!-- Header -->
     <div
-      class="d-flex align-items-center border-bottom px-0 px-lg-3 justify-content-center justify-content-lg-between"
+      class="d-flex align-items-center border-bottom px-0 px-lg-2 justify-content-around justify-content-lg-between"
       style="height: 4rem"
     >
-      <Button class="btn btn-sm btn-dark">
+      <Button @click="toggleMenu" class="btn btn-sm btn-dark">
         <iconify-icon icon="lucide:menu"></iconify-icon>
       </Button>
 
@@ -97,15 +112,19 @@ defineEmits(['taskClicked'])
 <style scoped>
 /* Sidebar */
 .sidebar {
-  width: 4rem;
+  width: 5rem;
   height: 100vh;
   transition: width 0.2s ease;
   z-index: 1030;
 }
 
-@media (min-width: 992px) {
-  .sidebar {
-    width: 13rem;
-  }
+/* Estado colapsado */
+.sidebar-collapsed {
+  width: 5rem;
+}
+
+/* Estado expandido */
+.sidebar-expanded {
+  width: 13rem;
 }
 </style>

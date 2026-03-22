@@ -16,6 +16,8 @@ const emits = defineEmits<{
 const emitActionClicked = (linkTitle: string) => {
   emits('actionClicked', linkTitle)
 }
+
+const { menuOpen } = useMenu()
 </script>
 
 <template>
@@ -25,16 +27,43 @@ const emitActionClicked = (linkTitle: string) => {
       exact-active-class="text-primary bg-secondary bg-opacity-10"
       :to="link.to"
       class="sidebar-link"
+      :class="{
+        'justify-content-start': menuOpen,
+        'justify-content-center': !menuOpen,
+      }"
     >
       <iconify-icon :icon="link.icon"></iconify-icon>
 
-      <span class="sidebar-text">{{ link.title }}</span>
+      <span
+        class="sidebar-text"
+        :class="{
+          'd-inline': menuOpen,
+          'd-none': !menuOpen,
+        }"
+        >{{ link.title }}</span
+      >
     </RouterLink>
 
-    <div v-else class="sidebar-link" @click="emitActionClicked(link.title)">
+    <div
+      v-else
+      class="sidebar-link"
+      @click="emitActionClicked(link.title)"
+      :class="{
+        'justify-content-start': menuOpen,
+        'justify-content-center': !menuOpen,
+      }"
+    >
       <iconify-icon :icon="link.icon"></iconify-icon>
 
-      <span class="sidebar-text">{{ link.title }}</span>
+      <span
+        class="sidebar-text"
+        :class="{
+          'd-inline': menuOpen,
+          'd-none': !menuOpen,
+        }"
+      >
+        {{ link.title }}
+      </span>
     </div>
   </template>
 </template>
@@ -49,7 +78,6 @@ const emitActionClicked = (linkTitle: string) => {
   border-radius: 0.5rem;
   text-decoration: none;
   color: var(--bs-secondary-color);
-  justify-content: center;
   transition: color 0.15s ease;
   cursor: pointer;
 }
@@ -59,17 +87,6 @@ const emitActionClicked = (linkTitle: string) => {
 }
 
 .sidebar-text {
-  display: none;
   white-space: nowrap;
-}
-
-@media (min-width: 992px) {
-  .sidebar-link {
-    justify-content: flex-start;
-  }
-
-  .sidebar-text {
-    display: inline;
-  }
 }
 </style>
