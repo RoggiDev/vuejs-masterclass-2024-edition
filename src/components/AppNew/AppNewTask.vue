@@ -15,7 +15,7 @@ const sheetOpen = defineModel<boolean>()
     </div>
 
     <div class="offcanvas-body">
-      <p>Content</p>
+      <FormKit type="text" />
     </div>
   </div>
 
