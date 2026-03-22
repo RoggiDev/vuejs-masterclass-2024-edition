@@ -1,10 +1,16 @@
 <script setup lang="ts">
+import AppNewTask from '@/components/AppNew/AppNewTask.vue'
+
 const { pageData } = storeToRefs(usePageStore())
+
+const taskSheetOpen = ref(false)
 </script>
 
 <template>
   <!-- Sidebar -->
-  <Sidebar />
+  <Sidebar @taskClicked="taskSheetOpen = true" />
+
+  <AppNewTask v-model="taskSheetOpen" />
 
   <!-- Main content -->
   <div class="main-content d-flex flex-column">

@@ -44,6 +44,8 @@ const executeAction = async (linkTitle: string) => {
     if (isLoggedOut) router.push('/login')
   }
 }
+
+defineEmits(['taskClicked'])
 </script>
 
 <template>
@@ -57,9 +59,24 @@ const executeAction = async (linkTitle: string) => {
         <iconify-icon icon="lucide:menu"></iconify-icon>
       </Button>
 
-      <Button class="btn btn-sm btn-dark">
-        <iconify-icon icon="lucide:plus"></iconify-icon>
-      </Button>
+      <!-- Dropdown -->
+      <div class="dropdown">
+        <a
+          class="d-flex align-items-center text-decoration-none"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+        >
+          <Button class="btn btn-sm btn-dark">
+            <iconify-icon icon="lucide:plus"></iconify-icon>
+          </Button>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li @click="$emit('taskClicked')"><a class="dropdown-item" href="#">Task</a></li>
+          <li><a class="dropdown-item" href="#">Project</a></li>
+        </ul>
+      </div>
     </div>
 
     <!-- Navigation -->
