@@ -3,6 +3,7 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import type { Projects } from '../supaQueries'
 import type { Ref } from 'vue'
 import type { GroupedCollabs } from '@/types/GroupedCollabs'
+import AppInPlaceEditStatus from '@/components/AppInPlaceEdit/AppInPlaceEditStatus.vue'
 
 export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<Projects[0]>[] => [
   {
@@ -20,7 +21,11 @@ export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<Projects[0]>[] 
     accessorKey: 'status',
     header: () => h('div', { class: 'text-start' }, 'Status'),
     cell: ({ row }) => {
-      return h('div', { class: 'text-start font-medium' }, row.getValue('status'))
+      return h(
+        'div',
+        { class: 'text-start font-medium' },
+        h(AppInPlaceEditStatus, { modelValue: row.original.status }),
+      )
     },
   },
   {

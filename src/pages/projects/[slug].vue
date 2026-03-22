@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AppInPlaceEditText from '@/components/AppInPlaceEdit/AppInPlaceEditText.vue'
+
 const { slug } = useRoute('/projects/[slug]').params
 
 const projectsLoader = useProjectsStore()
@@ -23,20 +25,20 @@ await getProject(slug)
         <tr>
           <th scope="row" class="w-25">Name</th>
           <td>
-            <AppInPlaceEdit v-model="project.name" @commit="updateProject" />
+            <AppInPlaceEditText v-model="project.name" @commit="updateProject" />
           </td>
         </tr>
 
         <tr>
           <th scope="row">Description</th>
           <td>
-            {{ project.description }}
+            <AppInPlaceEditText v-model="project.description" @commit="updateProject" />
           </td>
         </tr>
 
         <tr>
           <th scope="row">Status</th>
-          <td>{{ project.status }}</td>
+          <AppInPlaceEditStatus v-model="project.status" />
         </tr>
 
         <tr>
