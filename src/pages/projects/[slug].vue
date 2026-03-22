@@ -15,6 +15,12 @@ watch(
 )
 
 await getProject(slug)
+
+const { getProfilesByIds } = useCollabs()
+
+const collabs = project.value?.collaborators
+  ? await getProfilesByIds(project.value?.collaborators)
+  : []
 </script>
 
 <template>
@@ -46,13 +52,15 @@ await getProject(slug)
           <td>
             <div class="d-flex align-items-center">
               <RouterLink
-                v-for="collab in project.collaborators"
-                :key="collab"
-                to=""
+                v-for="collab in collabs"
+                :key="collab.id"
+                :to="{ name: '/users/[username]', params: { username: collab.username } }"
                 class="avatar-wrapper"
               >
                 <img
-                  src="https://avatars.githubusercontent.com/u/6128107?s=200&v=4"
+                  :src="
+                    collab.avatar_url || 'https://avatars.githubusercontent.com/u/6128107?s=200&v=4'
+                  "
                   alt="Collaborator avatar"
                   class="rounded-circle border border-secondary bg-dark avatar"
                   width="40"
@@ -83,9 +91,18 @@ await getProject(slug)
 
           <tbody>
             <tr v-for="task in project.tasks" :key="task.id">
-              <td>Lorem ipsum dolor sit amet.</td>
-              <td>In progress</td>
-              <td>22/08/2024</td>
+              <td class="p-0">
+                <RouterLink
+                  class="text-start d-block p-4 hover-bg"
+                  :to="{ name: '/tasks/[id]', params: { id: task.id } }"
+                >
+                  {{ task.name }}
+                </RouterLink>
+              </td>
+              <td>
+                <AppInPlaceEditStatus readonly :modelValue="task.status" />
+              </td>
+              <td>{{ task.due_date }}</td>
             </tr>
           </tbody>
         </table>
