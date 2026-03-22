@@ -38,7 +38,7 @@ await getProject(slug)
 
         <tr>
           <th scope="row">Status</th>
-          <AppInPlaceEditStatus v-model="project.status" />
+          <AppInPlaceEditStatus v-model="project.status" @commit="updateProject" />
         </tr>
 
         <tr>
