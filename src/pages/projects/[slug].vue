@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppInPlaceEditText from '@/components/AppInPlaceEdit/AppInPlaceEditText.vue'
+import AppInPlaceEditTextarea from '@/components/AppInPlaceEdit/AppInPlaceEditTextarea.vue'
 
 const { slug } = useRoute('/projects/[slug]').params
 
@@ -38,7 +39,7 @@ const collabs = project.value?.collaborators
         <tr>
           <th scope="row">Description</th>
           <td>
-            <AppInPlaceEditText v-model="project.description" @commit="updateProject" />
+            <AppInPlaceEditTextarea v-model="project.description" @commit="updateProject" />
           </td>
         </tr>
 
